@@ -1,0 +1,153 @@
+html, body {
+    height: 100%;
+    background-color: rgb(61,91,151); /*Other option rgba*/
+    overflow: hidden;
+}
+
+input[id="File_Input"] {
+    display: none;
+}
+
+                                                            /*Container Design Starts Here*/
+div.Container {
+    display: block;
+    width: 340px;
+    height: 40%;
+    /*Allows for div to be aligned center of page.
+    Note: A defined Width and Height is neccessary
+    for effect*/
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    /*********************************************/
+    text-align: center;
+}
+
+                                                            /*Top_Box Design Starts Here*/
+
+div.Top_Box {
+    background-color: rgba(0,0,0,0.5);
+    width: 100%;
+    height: 50px;
+    display: block;
+    color: white;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+div.Title_Label {
+    font-family: sans-serif;
+    color: white;
+    padding: 15px 0px;
+    text-align: center;
+}
+
+                                                            /*Top_Box Design Ends    Here*/
+
+                                                            /*Switch_Control Design Starts Here*/
+
+div.Switch_Control {
+    color: white;
+    border: 1px solid;
+    height: 15px;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 3px;
+    position: relative;
+}
+
+div.Login_Control, div.Register_Control {
+    width: 50%;
+    height: 100%;
+}
+
+div.Login_Control {
+    float: left;
+}
+
+div.Register_Control {
+    float: right;
+    background-color: white;
+    color: rgb(61,91,151);
+}
+
+label[id="Login_Label"], label[id="Register_Label"] {
+    font-family: sans-serif;
+    font-size: 13px;
+    display: block;
+}
+
+                                                            /*Switch_Control Design Ends   Here*/
+
+
+                                                            /*Input_Container Design Starts Here*/
+
+img.Profile_Image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    display: block;
+    margin: auto;
+    margin-bottom: 3px;
+}
+
+label[id="Message_Label"] {
+    font-family: sans-serif;
+    color: white;
+    width: 100%;
+    display: block;
+    margin-bottom: 4px;
+}
+
+div.Input_Container {
+    background-color: white;
+    display: block;
+    border-radius: 5px;
+    height: 125px;
+    overflow: hidden;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+input[id="Name_Input"],input[id="Email_Input"],input[id="Password_Input"] {
+    border-color: transparent;
+    width: 100%;
+    height: 35px;
+    display: block;
+    font-size: 12px;
+}
+
+div.Name_Separator, div.Email_Separator {
+    background-color: rgb(220,220,220);
+    height: 1px;
+    width: 100%;
+}
+
+                                                            /*Input_Container Design Ends   Here*/
+
+                                                            /*Login/Register Button Design Starts Here*/
+
+button[id="Login_Button"],button[id="Register_Button"] {
+    background-color: rgb(80,101,161);
+    border: none;
+    color: white;
+    width: 100%;
+    height: 35px;
+    border-radius: 5px;
+    font-size: 14px;
+/*    cursor: pointer;*/
+}
+
+button[id="Login_Button"] {
+    display: none;
+}
+
+
+
+                                                            /*Login/Register Button Design Ends  Here*/
+
+                                                            /*Container Design Ends  Here*/

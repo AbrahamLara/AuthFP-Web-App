@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <meta charset="utf-8">
+        <title>AuthFP Web App</title>
+        <link rel="stylesheet" type="text/css" href="CSS_Designs/main.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+
+    </head>
+
+    <body>
+
+        <input id="File_Input" type="file" onchange="readURL.call(this)" accept="image/jpeg,image/png">
+
+        <div class="Top_Box">
+
+            <div class="Title_Label">
+                AuthFP Web App
+            </div>
+
+        </div>
+
+        <div class="Container">
+
+            <img class="Profile_Image" id="Profile_Image" onclick="$('#File_Input').click()">
+
+            <label id="Message_Label">Fill in all fields</label>
+
+            <div class="Switch_Control" id="Switch_Control">
+
+                <div class="Login_Control" id="Login_Control">
+                    <label id="Login_Label">Login</label>
+                </div>
+
+                <div class="Register_Control" id="Register_Control">
+                  <label id="Register_Label">Register</label>
+                </div>
+
+            </div>
+
+            <div class="Input_Container" id="Input_Container">
+
+                <input placeholder="Name" id="Name_Input">
+
+                <div class="Name_Separator" id="Name_Separator"></div>
+
+                <input type="email" placeholder="Email" id="Email_Input">
+
+                <div class="Email_Separator" id="Email_Separator"></div>
+
+                <input type="password" placeholder="Password" id="Password_Input">
+
+            </div>
+
+            <button id="Login_Button">Enter</button>
+            <button id="Register_Button">Enter</button>
+
+        </div>
+
+        <script src="Main_JavaScript/app.js"></script>
+    </body>
+
+</html>

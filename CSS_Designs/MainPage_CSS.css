@@ -1,0 +1,160 @@
+html, body {
+    height: 100%;
+    background-color: rgb(61,91,151); /*Other option rgba*/
+    overflow: hidden;
+}
+
+div.Container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+}
+
+/*Top_Box Design Starts Here*/
+
+div.Top_Box {
+    background-color: rgba(0,0,0,0.5);
+    width: 100%;
+    height: 50px;
+    display: block;
+    color: white;
+    overflow: hidden;
+}
+                                                            /*Title_Container Design Starts Here*/
+
+div.Title_Container {
+    float: left;
+}
+
+img[id="Sidebar_Icon"] {
+    height: 40px;
+    float: left;
+    padding: 5px;
+}
+
+img[id="Sidebar_Icon"]:hover {
+    opacity: 0.8;
+}
+
+label.Title_Label {
+    font-family: sans-serif;
+    height: 100%;
+    width: 190px;
+    padding: 15px 0px;
+    display: block;
+}
+                                                            /*Title_Container Design Ends   Here*/
+
+                                                            /*User_Container Design Starts Here*/
+
+div.User_Container {
+    height: 100%;
+    width: 55%;
+    margin: auto;
+    float: right;
+}
+
+img[id="Profile_Image"] {
+    height: 50px;
+    border-radius: 25px;
+    float: left;
+}
+
+label[id="User_Name"] {
+    font-family: sans-serif;
+    height: 100%;
+    padding: 15px 5px;
+    display: inline-block;
+}
+
+button[id="Logout_Button"] {
+    float: inherit;
+    height: 100%;
+    width: 100px;
+    background-color: transparent;
+    color: white;
+    border: hidden;
+}
+
+                                                            /*User_Container Design Ends   Here*/
+
+/*Top_Box Design Ends   Here*/
+
+/*Main_Display Design Starts Here*/
+
+div.Main_Display {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+                                                            /*Sidebar Design Starts Here*/
+div.Sidebar {
+    background-color: rgba(255,255,255,0.1);
+    height: 100%;
+    width: 0px;
+    overflow: hidden;
+    float: left;
+}
+
+                                                            /*User_Table Design Starts Here*/
+
+div.User_Row {
+    height: 60px;
+    width: 190px;
+    padding: 5px 5px;
+    display: block;
+
+}
+
+div.User_Row:hover {
+    opacity: 0.7;
+}
+
+img[id="profilePictureURL"] {
+    width: 60px;
+    border-radius: 50%;
+    display: block;
+    float: left;
+}
+
+div.User_Info {
+    width: 68%;
+    height: 100%;
+    float: right;
+}
+
+label[id="Set_Name"],label[id="Set_Email"] {
+    font-family: sans-serif;
+    color: white;
+    display: block;
+    padding: 5px 5px;
+}
+
+                                                            /*User_Table Design Ends   Here*/
+
+                                                            /*Sidebar Design Ends   Here*/
+
+                                                            /*Message_Display_Box Design Starts Here*/
+
+div.Message_Display_Box {
+    width: 800px;
+    height: 100%;
+    margin: auto;
+    background-color: aqua;
+}
+
+div.Display_Messages {
+    height: 400px;
+    width: inherit;
+    background-color: bisque;
+    display: block;
+    margin-bottom: auto;
+}
+
+                                                            /*Message_Display_Box Design Ends   Here*/
+
+/*Main_Display Design Ends  Here*/
