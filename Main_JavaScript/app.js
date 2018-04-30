@@ -43,6 +43,17 @@ var file                = Profile_Image.baseURI;
     //Login and Register Controll Handlers
     Login_Control.addEventListener('click', Handle_Login_Control);
     Register_Control.addEventListener('click', Handle_Register_Control);
+    
+    //When Enter key is pressed it fires off enter button
+    Password_Input.addEventListener('keyup',function(event) {
+        event.preventDefault();
+        
+        if (event.keyCode === 13) {
+            
+            Login_Button.style.visibility === 'hidden' ? Register_Button.click() : Login_Button.click();
+            
+        }
+    });
 
     //Login and Register Button Handlers
     Login_Button.addEventListener('click', e => {
@@ -120,7 +131,7 @@ function Handle_Login_Button(auth) {
 
 
     firebase.auth().signInWithEmailAndPassword(Email_Input.value, Password_Input.value).then(function() {
-
+        
         window.location = "MainPage.html";
 
     }).catch(function(error) {
@@ -170,7 +181,7 @@ function Handle_Register_Button(auth,database,storage) {
 
     }).catch(function(error) {
 
-        if(error.code === 'storage/invalid-argument') {
+        if (error.code === 'storage/invalid-argument') {
             console.log('Successfully Registered User');
 
             Set_Message_Label('rgb(255,255,255)','Successfully Registered User');

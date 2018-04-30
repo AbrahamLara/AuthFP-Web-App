@@ -4,6 +4,8 @@ const User_Name             = document.getElementById('User_Name');
 //Main_Display intializers
 const Sidebar               = document.getElementById('Sidebar');
 const Message_Display_Box   = document.getElementById('Message_Display_Box');
+const Upload_Image          = document.getElementById('Upload_Image');
+const Text_Input            = document.getElementById('Text_Input');
 //Initialize Firebase
 var config                  = {
     apiKey: "AIzaSyCylUT0zVmt8UocdVuHZ3RGmuj1fNyyFbw",
@@ -13,15 +15,8 @@ var config                  = {
     storageBucket: "playground-a45e6.appspot.com",
     messagingSenderId: "102092502135"
 };
-//
-var User                    = {
-    id: "",
-    name: "",
-    email: "",
-    profileImageURL: ""
-}
 
-var click                   = 0;
+var click                   = true;
 
 (function() {
     
@@ -39,12 +34,11 @@ var click                   = 0;
     //Sets up Sidebar once Sidebar_Icon is clicked
     $('#Sidebar_Icon').click(function() {
         
-        click += 1;
-        
-        if(click == 1) Sidebar.style.width = '255px';
-        
-        else {
-            click = 0;
+        if(click) {
+            click = false;
+            Sidebar.style.width = '255px';
+        } else {
+            click = true;
             Sidebar.style.width = '0px';
         }
     });
@@ -52,6 +46,14 @@ var click                   = 0;
     //Initializes WebPage for logged in User
     intializeIfUserIsLoggedOn(auth,database);
     
+    Text_Input.addEventListener('keyup', function(event) {
+        event.preventDefault();
+        
+        if (event.keyCode === 13) {
+            enterKeyAction(Text_Input.value);
+            Text_Input.value = "";
+        }
+    });
 }());
 
 function intializeIfUserIsLoggedOn(auth,database) {
@@ -71,17 +73,19 @@ function intializeIfUserIsLoggedOn(auth,database) {
 }
 
 function Retrieve_User_Info(UserInfo) {
-    console.log('User Id: ' + UserInfo);
+    const fire = new RetrieveFirebaseUserInfo(UserInfo);
+    fire.getUserId();
+    
 }
 
 function Intialize_Sidebar(database,uid) {
     database.child("AuthFP App Users").on('child_added', function(snapshot) {
-        User.id                 = snapshot.key;
-        User.name               = snapshot.child('name').val();
-        User.email              = snapshot.child('email').val();
-        User.profileImageURL    = snapshot.child('profileImageURL').val();
+        var id                 = snapshot.key;
+        var name               = snapshot.child('name').val();
+        var email              = snapshot.child('email').val();
+        var profileImageURL    = snapshot.child('profileImageURL').val();
         
-        if(User.id !== uid) $('#User_Table').append("<div class=\"User_Row\" onclick=\"Retrieve_User_Info('"+ User.id +"')\"><img id=\"profilePictureURL\" src=\" " + User.profileImageURL + "\" draggable=\"false\"><div class=\"User_Info\"><label id=\"Set_Name\"> " + User.name + " </label><label id=\"Set_Email\"> " + User.email + " </label></div></div>");
+        if(id !== uid) $('#User_Table').append("<div class=\"User_Row\" onclick=\"Retrieve_User_Info('"+ id +"')\"><img id=\"profilePictureURL\" src=\" " + profileImageURL + "\" draggable=\"false\"><div class=\"User_Info\"><label id=\"Set_Name\"> " + name + " </label><label id=\"Set_Email\"> " + email + " </label></div></div>");
     });
 }
 
@@ -94,4 +98,8 @@ function Setup_User_Label(database,firebaseUser) {
         
     });
     
+}
+
+function enterKeyAction(text) {
+    console.log(text);
 }
