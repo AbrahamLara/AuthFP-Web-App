@@ -1,13 +1,16 @@
 //User_Label Initializers
-const Profile_Image         = document.getElementById('Profile_Image');
-const User_Name             = document.getElementById('User_Name');
+const Profile_Image             = document.getElementById('Profile_Image');
+const User_Name                 = document.getElementById('User_Name');
 //Main_Display intializers
-const Sidebar               = document.getElementById('Sidebar');
-const Message_Display_Box   = document.getElementById('Message_Display_Box');
-const Upload_Image          = document.getElementById('Upload_Image');
-const Text_Input            = document.getElementById('Text_Input');
+const Sidebar                   = document.getElementById('Sidebar');
+const Message_Display_Box       = document.getElementById('Message_Display_Box');
+const Upload_Image              = document.getElementById('Upload_Image');
+const Text_Input                = document.getElementById('Text_Input');
+const Blue_Bubble               = document.getElementById('Blue_Bubble');
+const Grey_Bubble               = document.getElementById('Grey_Bubble');
+const ChatPartner_ProfileImage  = document.getElementById('ChatPartner_ProfileImage');
 //Initialize Firebase
-var config                  = {
+var config                      = {
     apiKey: "AIzaSyCylUT0zVmt8UocdVuHZ3RGmuj1fNyyFbw",
     authDomain: "playground-a45e6.firebaseapp.com",
     databaseURL: "https://playground-a45e6.firebaseio.com",
@@ -16,7 +19,7 @@ var config                  = {
     messagingSenderId: "102092502135"
 };
 
-var click                   = true;
+var click                       = true;
 
 (function() {
     
@@ -46,6 +49,7 @@ var click                   = true;
     //Initializes WebPage for logged in User
     intializeIfUserIsLoggedOn(auth,database);
     
+    //Allows for enter key to send messages
     Text_Input.addEventListener('keyup', function(event) {
         event.preventDefault();
         
@@ -102,4 +106,6 @@ function Setup_User_Label(database,firebaseUser) {
 
 function enterKeyAction(text) {
     console.log(text);
+    //Length 41
+    $('#Display_Messages').append("<div class=\"Cell\" style=\"max-width:300px;margin-left:auto\"><label id=\"Blue_Bubble\">" + text + "</label></div>");
 }

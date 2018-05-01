@@ -141,46 +141,56 @@ label[id="Set_Name"],label[id="Set_Email"] {
 div.Message_Display_Box {
     width: 800px;
     height: 800px;
-    margin: auto;
     border-radius: 5px;
+    float: right;
+    margin-top: 10px;
+    margin-right: 10px;
 }
 
 div.Display_Messages {
     height: 759px;
     width: inherit;
-    background-color: white;
+/*    background-color: white;*/
     display: block;
-    
+    overflow: scroll;
 }
 
-label[id="Grey_Bubble"], label[id="Blue_Bubble"] {
+                                                            /*Cell Design Starts Here*/
+div.Cell {
+/*    width: inherit;*/
+/*    background-color: aqua;*/
     display: block;
-    width: 200px;
     position: relative;
+    margin-top: 10px;
+}
+
+label[id="Blue_Bubble"],label[id="Grey_Bubble"] {
+    display: block;
     color: white;
     font-family: sans-serif;
+    border-radius: 10px;
     padding: 5px 5px;
+/*    max-width: 300px;*/
+}
+
+img[id="ChatPartner_ProfileImage"] {
+    height: 20px;
     border-radius: 10px;
 }
 
 label[id="Grey_Bubble"] {
-    margin-right: auto;
     background-color: rgb(200,200,200);
+    margin-right: auto;
+    margin-left: 10px;
 }
 
 label[id="Blue_Bubble"] {
-    margin-left: auto;
     background-color: rgb(0,137,250);
+    margin-left: auto;
+    margin-right: 10px;
 }
 
-
-                                                            /*Message_Display_Box Design Ends   Here*/
-
-div.Seperator {
-    height: 1px;
-    width: 100%;
-    background-color: rgb(0,0,0);
-}
+                                                            /*Cell Design Ends   Here*/
 
                                                             /*Input_Views Design Starts Here*/
 div.Input_View {
@@ -192,6 +202,7 @@ div.Input_View {
 
 img[id="Upload_Image"] {
     height: inherit;
+    border-radius: 10px;
 }
 
 input[id="Text_Input"] {
@@ -200,8 +211,12 @@ input[id="Text_Input"] {
     height: 38px;
     width: 758px;
     font-size: 15px;
+    background-color: transparent;
+    color: white;
 }
 
                                                             /*Input_Views Design Ends  Here*/
+
+                                                            /*Message_Display_Box Design Ends   Here*/
 
 /*Main_Display Design Ends  Here*/
