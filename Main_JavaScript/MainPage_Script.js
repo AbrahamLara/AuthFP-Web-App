@@ -20,6 +20,7 @@ var config                      = {
 };
 
 var click                       = true;
+var databaseInScope = null;
 
 (function() {
     
@@ -29,6 +30,8 @@ var click                       = true;
     const database  = firebase.database().ref();
     const storage   = firebase.storage().ref();
     
+    databaseInScope = database;
+
     //Logout_Button Handler
     document.getElementById('Logout_Button').addEventListener('click', e => {
         auth.signOut();
@@ -54,8 +57,10 @@ var click                       = true;
         event.preventDefault();
         
         if (event.keyCode === 13) {
-            enterKeyAction(Text_Input.value);
-            Text_Input.value = "";
+            if (Text_Input.value !== "")  {
+                enterKeyAction(Text_Input.value,database,storage);
+                Text_Input.value = "";
+            }
         }
     });
 }());
@@ -76,10 +81,26 @@ function intializeIfUserIsLoggedOn(auth,database) {
     });
 }
 
-function Retrieve_User_Info(UserInfo) {
-    const fire = new RetrieveFirebaseUserInfo(UserInfo);
-    fire.printtUserId();
-    
+function Retrieve_User_Info(profileImageURL,id,uid) {
+    const need = new SetNecessities();
+
+    databaseInScope.child('User-Messages').child(uid).child(id).on('child_added', function(snapshot) {
+        var messageId = snapshot.key;
+
+        databaseInScope.child('AuthFP App User Messages').child(messageId).on('value', function(Snapshot) {
+            
+            var toId = Snapshot.child('toId').val();
+            var fromId = Snapshot.child('fromId').val();
+            var text = Snapshot.child('text').val();
+            
+            if(fromId === uid) {
+                $('#Display_Messages').append(need.setBlueBubble(text));
+            } else {
+                $('#Display_Messages').append(need.setGreyBubble(text,profileImageURL));
+            }
+        });
+
+    });
 }
 
 function Intialize_Sidebar(database,uid) {
@@ -88,8 +109,11 @@ function Intialize_Sidebar(database,uid) {
         var name               = snapshot.child('name').val();
         var email              = snapshot.child('email').val();
         var profileImageURL    = snapshot.child('profileImageURL').val();
+
+        const need = new SetNecessities();
         
-        if(id !== uid) $('#User_Table').append("<div class=\"User_Row\" onclick=\"Retrieve_User_Info('"+ id +"')\"><img id=\"profilePictureURL\" src=\" " + profileImageURL + "\" draggable=\"false\"><div class=\"User_Info\"><label id=\"Set_Name\"> " + name + " </label><label id=\"Set_Email\"> " + email + " </label></div></div>");
+        
+        if(id !== uid) $('#User_Table').append(need.setUserInfo(id,profileImageURL,name,email,uid));
     });
 }
 
@@ -104,7 +128,6 @@ function Setup_User_Label(database,firebaseUser) {
     
 }
 
-function enterKeyAction(text,length) {
+function enterKeyAction(text,database,storage) {
     console.log(text);
-    $('#Display_Messages').append("<div class=\"Cell\"><div class=\"cell\" style=\"margin-left: auto\"><span id=\"Bubble\" style=\"background-color:rgb(0,137,250);float:right;\">" + text + "</span></div></div><div class=\"Cell\" style=\"height: 10px\"></div>");
 }
