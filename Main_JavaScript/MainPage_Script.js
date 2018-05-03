@@ -18,9 +18,11 @@ var config                      = {
     storageBucket: "playground-a45e6.appspot.com",
     messagingSenderId: "102092502135"
 };
-
 var click                       = true;
 var databaseInScope = null;
+var storageInScope = null;
+var chatPartner = null;
+var currentUser = null;
 
 (function() {
     
@@ -31,6 +33,7 @@ var databaseInScope = null;
     const storage   = firebase.storage().ref();
     
     databaseInScope = database;
+    storageInScope = storage;
 
     //Logout_Button Handler
     document.getElementById('Logout_Button').addEventListener('click', e => {
@@ -70,10 +73,10 @@ function intializeIfUserIsLoggedOn(auth,database) {
     auth.onAuthStateChanged(firebaseUser => {
         
         if(firebaseUser) {
-            
+            currentUser = firebaseUser.uid;
             console.log('User Currently Logged In');
             Setup_User_Label(database,firebaseUser);
-            Intialize_Sidebar(database,firebaseUser.uid);
+            Intialize_Sidebar(database,currentUser);
             
         } else {
             window.location= "index.html";
@@ -83,6 +86,8 @@ function intializeIfUserIsLoggedOn(auth,database) {
 
 function Retrieve_User_Info(profileImageURL,id,uid) {
     const need = new SetNecessities();
+
+    chatPartner = id;
 
     databaseInScope.child('User-Messages').child(uid).child(id).on('child_added', function(snapshot) {
         var messageId = snapshot.key;
@@ -112,7 +117,6 @@ function Intialize_Sidebar(database,uid) {
 
         const need = new SetNecessities();
         
-        
         if(id !== uid) $('#User_Table').append(need.setUserInfo(id,profileImageURL,name,email,uid));
     });
 }
@@ -128,6 +132,28 @@ function Setup_User_Label(database,firebaseUser) {
     
 }
 
-function enterKeyAction(text,database,storage) {
-    console.log(text);
+function enterKeyAction(message) {
+    if(chatPartner !== null && message !== "") {
+
+        var childRef = databaseInScope.child('AuthFP App User Messages').push();
+
+        childRef.update({
+            fromId: currentUser,
+            text: message,
+            timeStamp: 1,
+            toId: chatPartner,
+        });
+
+        var userMessageRef = databaseInScope.child('User-Messages').child(currentUser).child(chatPartner);
+        
+        var messageId = {};
+
+        messageId[childRef.key] = 1;
+
+        console.log(messageId);
+        
+        userMessageRef.update(messageId);
+        
+        databaseInScope.child('User-Messages').child(chatPartner).child(currentUser).update(messageId);
+    }
 }

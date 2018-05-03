@@ -170,8 +170,8 @@ div.Cell {
 }
 
 #Chat_Partner_Profile_Image {
-    height: 20px;
-    border-radius: 10px;
+    height: 30px;
+    border-radius: 15px;
 }
 
 div.cell {
@@ -183,6 +183,7 @@ div.cell {
     border-radius: 10px;
     color: white;
     font-family: sans-serif;
+    font-size: 20px;
 }
                                                             /*Cell Design Ends   Here*/
 
