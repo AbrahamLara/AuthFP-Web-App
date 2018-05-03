@@ -16,6 +16,8 @@
 
     <body>
 
+        <input type="file" id="Upload_File">
+
         <div class="Container">
 
             <div class="Top_Box">
@@ -61,20 +63,39 @@
                 <div class="Message_Display_Box" id="Message_Display_Box">
                     
                     <div class="Display_Messages" id="Display_Messages">
-                        
-                        <div class="Cell" style="max-width: 300px">
-                            
-                            <label id="Grey_Bubble">This is shorter text</label>
-                            
-                            <img id="ChatPartner_ProfileImage" src="img/default%20profile%20picture.jpeg">
-                            
+                        <!-- <span id="Bubble" style="background-color:rgb(0,130,250);">This is text that will not go over 300px width</span> -->
+
+                        <div class="Cell">
+
+                            <div class="cell" style="margin-left: 15px">
+
+                                    <span id="Bubble" style="background-color:rgb(200,200,200);float: left;">This is text that will not go over 300px width</span>
+
+                            </div>
+
+                            <img id="Chat_Partner_Profile_Image" src="img/default profile picture.jpeg">
+
                         </div>
+
+                        <div class="Cell" style="height: 10px"></div>
+
+                        <div class="Cell">
+
+                            <div class="cell" style="margin-left: auto;">
+    
+                                    <span id="Bubble" style="background-color:rgb(0,137,250);float:right;">This is text that will not go over 300px width</span>
+                                    
+                            </div>
+    
+                        </div>
+                        
+                        <div class="Cell" style="height: 10px"></div>
 
                     </div>
 
                     <div class="Input_View">
 
-                        <img id="Upload_Image" src="img/uploadImage.png">
+                        <img id="Upload_Image" src="img/uploadImage.png" onclick="$('#Upload_File').click()">
 
                         <input id="Text_Input" placeholder="Enter text..." type="text">
 
@@ -91,4 +112,5 @@
         <script src="Main_JavaScript/RetrieveFirebaseUserInfo.js"></script>
 
     </body>
+
 </html>

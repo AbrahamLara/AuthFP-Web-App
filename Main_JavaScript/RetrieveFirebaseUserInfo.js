@@ -5,7 +5,16 @@ class RetrieveFirebaseUserInfo {
         this.userName = userName;
     }
 
-    getUserId() {
+    printtUserId() {
         console.log(this.userId);
     }
+
+    getUserId() {
+        return this.userId;
+    }
+
+    userIdIsEmpty() {
+        return this.userId === null;
+    }
+
 }

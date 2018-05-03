@@ -78,7 +78,7 @@ function intializeIfUserIsLoggedOn(auth,database) {
 
 function Retrieve_User_Info(UserInfo) {
     const fire = new RetrieveFirebaseUserInfo(UserInfo);
-    fire.getUserId();
+    fire.printtUserId();
     
 }
 
@@ -104,8 +104,7 @@ function Setup_User_Label(database,firebaseUser) {
     
 }
 
-function enterKeyAction(text) {
+function enterKeyAction(text,length) {
     console.log(text);
-    //Length 41
-    $('#Display_Messages').append("<div class=\"Cell\" style=\"max-width:300px;margin-left:auto\"><label id=\"Blue_Bubble\">" + text + "</label></div>");
+    $('#Display_Messages').append("<div class=\"Cell\"><div class=\"cell\" style=\"margin-left: auto\"><span id=\"Bubble\" style=\"background-color:rgb(0,137,250);float:right;\">" + text + "</span></div></div><div class=\"Cell\" style=\"height: 10px\"></div>");
 }
