@@ -143,20 +143,19 @@ div.User_Info {
                                                             /*Message_Display_Box Design Starts Here*/
 
 div.Message_Display_Box {
-    width: 800px;
-    height: 800px;
+    width: 500px;
+    height: 802px;
     border-radius: 5px;
-    float: right;
-    margin-top: 10px;
-    margin-right: 10px;
+    margin: auto;
+    background-color: white;
 }
 
 div.Display_Messages {
-    height: 759px;
+    height: 760px;
     width: inherit;
-   /* background-color: white; */
     display: block;
     overflow: scroll;
+    background-color: white;
 }
 
                                                             /*Cell Design Starts Here*/
@@ -170,22 +169,31 @@ div.Cell {
 }
 
 #Chat_Partner_Profile_Image {
-    height: 30px;
-    border-radius: 15px;
+    height: 25px;
+    border-radius: 12px;
+    margin: auto;
+    margin-left: 5px;
 }
 
 div.cell {
     width: 300px;
+    padding: 0px 5px;
 }
 
 #Bubble {
     padding: 5px 5px;
-    border-radius: 10px;
-    color: white;
+    border-radius: 15px;
     font-family: sans-serif;
-    font-size: 20px;
+    font-size: 15px;
+    padding: 10px 10px;
 }
                                                             /*Cell Design Ends   Here*/
+
+div.Seperator {
+    height: 1px;
+    display: block;
+    background-color: lightgrey;
+}
 
                                                             /*Input_Views Design Starts Here*/
 div.Input_View {
@@ -204,10 +212,10 @@ div.Input_View {
     border: hidden;
     position: absolute;
     height: 38px;
-    width: 758px;
+    width: 458px;
     font-size: 15px;
     background-color: transparent;
-    color: white;
+    /* color: white; */
 }
 
                                                             /*Input_Views Design Ends  Here*/

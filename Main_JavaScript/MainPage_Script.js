@@ -3,7 +3,7 @@ const Profile_Image             = document.getElementById('Profile_Image');
 const User_Name                 = document.getElementById('User_Name');
 //Main_Display intializers
 const Sidebar                   = document.getElementById('Sidebar');
-const Message_Display_Box       = document.getElementById('Message_Display_Box');
+const Display_Messages          = document.getElementById('Display_Messages');
 const Upload_Image              = document.getElementById('Upload_Image');
 const Text_Input                = document.getElementById('Text_Input');
 const Blue_Bubble               = document.getElementById('Blue_Bubble');
@@ -19,10 +19,10 @@ var config                      = {
     messagingSenderId: "102092502135"
 };
 var click                       = true;
-var databaseInScope = null;
-var storageInScope = null;
-var chatPartner = null;
-var currentUser = null;
+var databaseInScope             = null;
+var storageInScope              = null;
+var chatPartner                 = null;
+var currentUser                 = null;
 
 (function() {
     
@@ -33,7 +33,7 @@ var currentUser = null;
     const storage   = firebase.storage().ref();
     
     databaseInScope = database;
-    storageInScope = storage;
+    storageInScope  = storage;
 
     //Logout_Button Handler
     document.getElementById('Logout_Button').addEventListener('click', e => {
@@ -85,27 +85,34 @@ function intializeIfUserIsLoggedOn(auth,database) {
 }
 
 function Retrieve_User_Info(profileImageURL,id,uid) {
-    const need = new SetNecessities();
+    const need  = new SetNecessities();
 
     chatPartner = id;
+
+    //Clears chatlog so that different messages can load for individual conversations
+    Display_Messages.innerHTML = "";
 
     databaseInScope.child('User-Messages').child(uid).child(id).on('child_added', function(snapshot) {
         var messageId = snapshot.key;
 
         databaseInScope.child('AuthFP App User Messages').child(messageId).on('value', function(Snapshot) {
-            
-            var toId = Snapshot.child('toId').val();
-            var fromId = Snapshot.child('fromId').val();
-            var text = Snapshot.child('text').val();
+
+            var toId    = Snapshot.child('toId').val();
+            var fromId  = Snapshot.child('fromId').val();
+            var text    = Snapshot.child('text').val();
             
             if(fromId === uid) {
                 $('#Display_Messages').append(need.setBlueBubble(text));
             } else {
                 $('#Display_Messages').append(need.setGreyBubble(text,profileImageURL));
             }
+
+            //Allows for the div to automatically scroll down to load new message
+            Display_Messages.scrollTop = Display_Messages.scrollHeight;
         });
 
     });
+
 }
 
 function Intialize_Sidebar(database,uid) {
@@ -149,11 +156,10 @@ function enterKeyAction(message) {
         var messageId = {};
 
         messageId[childRef.key] = 1;
-
-        console.log(messageId);
         
         userMessageRef.update(messageId);
         
         databaseInScope.child('User-Messages').child(chatPartner).child(currentUser).update(messageId);
+        
     }
 }

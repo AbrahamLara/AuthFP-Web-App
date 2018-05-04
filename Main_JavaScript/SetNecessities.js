@@ -7,11 +7,11 @@ class SetNecessities {
     }
 
     setBlueBubble(text) {
-        return "<div class=\"Cell\"><div class=\"cell\" style=\"margin-left: auto\"><span id=\"Bubble\" style=\"background-color:rgb(0,137,250);float:right;\">" + text + "</span></div></div><div class=\"Cell\" style=\"height: 10px\"></div>";
+        return "<div class=\"Cell\"><div class=\"cell\" style=\"margin-left: auto\"><span id=\"Bubble\" style=\"background-color:rgb(0,137,250);float:right;color:white;\">" + text + "</span></div></div>";
     }
 
     setGreyBubble(text,profileImage) {
-        return "<div class=\"Cell\"><div class=\"cell\" style=\"margin-left: 15px\"><span id=\"Bubble\" style=\"background-color:rgb(200,200,200);float: left;\">" + text + "</span></div><img id=\"Chat_Partner_Profile_Image\" src=\"" + profileImage + "\"></div>";
+        return "<div class=\"Cell\"><div class=\"cell\" style=\"margin-left: 15px\"><span id=\"Bubble\" style=\"background-color:rgb(240,240,240);float: left;color:black;\">" + text + "</span></div><img id=\"Chat_Partner_Profile_Image\" src=\"" + profileImage + "\"></div>";
     }
 
     setUserInfo(id,profileImageURL,name,email,uid,database) {
