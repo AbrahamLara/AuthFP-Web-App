@@ -4,6 +4,8 @@
 
     <head>
 
+        <meta charset="utf-8">
+
         <title>AuthFP Main Page</title>
         
         <link rel="stylesheet" type="text/css" href="CSS_Designs/MainPage_CSS.css">
@@ -16,7 +18,7 @@
 
     <body>
 
-        <input type="file" id="Upload_File">
+        <input id="Upload_File" type="file" onchange="readURL.call(this)" accept="image/jpeg,image/png">
 
         <div class="Container">
 
@@ -55,6 +57,7 @@
 <!--                        User Accounts from database get appended here-->
 
                             </tr>
+
                         </tbody>
 
                     </table>
@@ -69,7 +72,7 @@
                         <div class="Display_Messages" id="Display_Messages">
 
                             <!-- ChatLog goes here -->
-
+                        
                         </div>
 
                         <div class="Seperator"></div>
@@ -78,7 +81,7 @@
 
                             <img id="Upload_Image" src="img/uploadImage.png" onclick="$('#Upload_File').click()">
 
-                            <input id="Text_Input" placeholder="Enter text..." type="text">
+                            <input id="Text_Input" placeholder="Enter message..." type="text">
 
                         </div>
                         

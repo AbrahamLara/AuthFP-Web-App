@@ -3,12 +3,15 @@ const Profile_Image             = document.getElementById('Profile_Image');
 const User_Name                 = document.getElementById('User_Name');
 //Main_Display intializers
 const Sidebar                   = document.getElementById('Sidebar');
+//Display_Message Initializers
 const Display_Messages          = document.getElementById('Display_Messages');
 const Upload_Image              = document.getElementById('Upload_Image');
 const Text_Input                = document.getElementById('Text_Input');
 const Blue_Bubble               = document.getElementById('Blue_Bubble');
 const Grey_Bubble               = document.getElementById('Grey_Bubble');
 const ChatPartner_ProfileImage  = document.getElementById('ChatPartner_ProfileImage');
+var chatPartner                 = null;
+var currentUser                 = null;
 //Initialize Firebase
 var config                      = {
     apiKey: "AIzaSyCylUT0zVmt8UocdVuHZ3RGmuj1fNyyFbw",
@@ -18,11 +21,13 @@ var config                      = {
     storageBucket: "playground-a45e6.appspot.com",
     messagingSenderId: "102092502135"
 };
-var click                       = true;
 var databaseInScope             = null;
 var storageInScope              = null;
-var chatPartner                 = null;
-var currentUser                 = null;
+//Deals with retrieving file stuff
+var storage_ref                 = 'AuthFP_App_Users_Profile_Images/';
+// var file_name                   = null;
+//OTher stuff yet to be named
+var click                       = true;
 
 (function() {
     
@@ -61,11 +66,12 @@ var currentUser                 = null;
         
         if (event.keyCode === 13) {
             if (Text_Input.value !== "")  {
-                enterKeyAction(Text_Input.value,database,storage);
+                enterKeyAction();
                 Text_Input.value = "";
             }
         }
     });
+
 }());
 
 function intializeIfUserIsLoggedOn(auth,database) {
@@ -100,11 +106,16 @@ function Retrieve_User_Info(profileImageURL,id,uid) {
             var toId    = Snapshot.child('toId').val();
             var fromId  = Snapshot.child('fromId').val();
             var text    = Snapshot.child('text').val();
-            
-            if(fromId === uid) {
-                $('#Display_Messages').append(need.setBlueBubble(text));
+            var imageUrl = Snapshot.child('imageUrl').val();
+
+            if (fromId === uid) {
+
+                imageUrl !== null ? $('#Display_Messages').append(need.setBlueBubbleImage(imageUrl)) 
+                : $('#Display_Messages').append(need.setBlueBubbleText(text));
+
             } else {
-                $('#Display_Messages').append(need.setGreyBubble(text,profileImageURL));
+                imageUrl !== null ? $('#Display_Messages').append(need.setGreyBubbleImage(imageUrl,profileImageURL)) 
+                : $('#Display_Messages').append(need.setGreyBubbleText(text,profileImageURL));
             }
 
             //Allows for the div to automatically scroll down to load new message
@@ -139,14 +150,14 @@ function Setup_User_Label(database,firebaseUser) {
     
 }
 
-function enterKeyAction(message) {
-    if(chatPartner !== null && message !== "") {
+function enterKeyAction() {
+    if(chatPartner !== null) {
 
         var childRef = databaseInScope.child('AuthFP App User Messages').push();
 
         childRef.update({
             fromId: currentUser,
-            text: message,
+            text: Text_Input.value,
             timeStamp: 1,
             toId: chatPartner,
         });
@@ -162,4 +173,58 @@ function enterKeyAction(message) {
         databaseInScope.child('User-Messages').child(chatPartner).child(currentUser).update(messageId);
         
     }
+}
+
+function readURL() {
+
+    if(this.files && this.files[0]) {
+        var obj     = new FileReader();
+        obj.onload  = function(data) {
+            Profile_Image.src = data.target.result;
+        }
+
+        obj.readAsDataURL(this.files[0]);
+
+        StoreImageToFirebase(this.files[0],this.files[0].name);
+    }
+
+}
+
+function StoreImageToFirebase(file,file_name) {
+    console.log('Uploading to fireabase!!!');
+
+    if (chatPartner !== null) {
+        
+        //Store image into userMessages
+        storageInScope.child(storage_ref + file_name).put(file).on('state_changed', function progress(snapshot) {
+
+            //Handle Upload Session
+            console.log('Profile Image in process of uploading');
+
+        }, function error(err) {
+
+            //Handle Failed Upload
+            console.log('Profile Image failed to upload to storage or none was chosen');
+
+        }, function complete() {
+
+            console.log('Profile Image successfully uploaded');
+
+            //Retrieve Profile Image URL
+            storageInScope.child(storage_ref + file_name).getDownloadURL().then(function(url) {
+
+                console.log('Successfully Registered User');
+
+                // Register_User_In_Database(auth,database,url);
+
+            }).catch(function(error) {
+
+                //Handle any errors
+                console.log(error);
+
+            });
+        });
+
+    }
+
 }

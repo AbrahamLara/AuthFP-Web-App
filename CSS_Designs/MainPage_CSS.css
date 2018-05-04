@@ -180,6 +180,13 @@ div.cell {
     padding: 0px 5px;
 }
 
+#Img_Bubble {
+    border-radius: 10px;
+    max-width: 300px;
+    background-color: aliceblue;
+}
+
+
 #Bubble {
     padding: 5px 5px;
     border-radius: 15px;

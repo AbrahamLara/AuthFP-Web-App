@@ -6,12 +6,20 @@ class SetNecessities {
         return this.userId === null;
     }
 
-    setBlueBubble(text) {
+    setBlueBubbleText(text) {
         return "<div class=\"Cell\"><div class=\"cell\" style=\"margin-left: auto\"><span id=\"Bubble\" style=\"background-color:rgb(0,137,250);float:right;color:white;\">" + text + "</span></div></div>";
     }
 
-    setGreyBubble(text,profileImage) {
+    setGreyBubbleText(text,profileImage) {
         return "<div class=\"Cell\"><div class=\"cell\" style=\"margin-left: 15px\"><span id=\"Bubble\" style=\"background-color:rgb(240,240,240);float: left;color:black;\">" + text + "</span></div><img id=\"Chat_Partner_Profile_Image\" src=\"" + profileImage + "\"></div>";
+    }
+
+    setBlueBubbleImage(imageSrc) {
+        return "<div class=\"Cell\"><div class=\"cell\" style=\"margin-left: auto\"><img id=\"Img_Bubble\" style=\"float:right\" src=\"" + imageSrc + "\"></div></div>";
+    }
+
+    setGreyBubbleImage(imageSrc,profileImage) {
+        return "<div class=\"Cell\"><div class=\"cell\" style=\"margin-left: 15px\"><img id=\"Img_Bubble\" style=\"float:left\" src=\"" + imageSrc + "\"></div><img id=\"Chat_Partner_Profile_Image\" src=\"" + profileImage + "\"></div>";
     }
 
     setUserInfo(id,profileImageURL,name,email,uid,database) {
