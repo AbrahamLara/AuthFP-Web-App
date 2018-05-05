@@ -24,10 +24,10 @@ var config                      = {
 var databaseInScope             = null;
 var storageInScope              = null;
 //Deals with retrieving file stuff
-var storage_ref                 = 'AuthFP_App_Users_Profile_Images/';
-// var file_name                   = null;
+var file_name                   = null;
 //OTher stuff yet to be named
 var click                       = true;
+
 
 (function() {
     
@@ -66,10 +66,29 @@ var click                       = true;
         
         if (event.keyCode === 13) {
             if (Text_Input.value !== "")  {
-                enterKeyAction();
+                enterKeyAction({
+                    fromId: currentUser,
+                    text: Text_Input.value,
+                    timeStamp: 1,
+                    toId: chatPartner,
+                });
                 Text_Input.value = "";
             }
         }
+    });
+
+    //Will allow for me to get the image width and height to be able to upoad to firebase
+    $("#Upload_File").change(function(e) {
+        var file, img;
+
+        if ((file = this.files[0])) {
+            img = new Image();
+            img.onload = function() {
+                StoreImageToFirebase(file,file.name,this.width,this.height);
+            };
+
+        }
+
     });
 
 }());
@@ -150,17 +169,12 @@ function Setup_User_Label(database,firebaseUser) {
     
 }
 
-function enterKeyAction() {
+function enterKeyAction(newNode) {
     if(chatPartner !== null) {
 
         var childRef = databaseInScope.child('AuthFP App User Messages').push();
 
-        childRef.update({
-            fromId: currentUser,
-            text: Text_Input.value,
-            timeStamp: 1,
-            toId: chatPartner,
-        });
+        childRef.update(newNode);
 
         var userMessageRef = databaseInScope.child('User-Messages').child(currentUser).child(chatPartner);
         
@@ -175,47 +189,39 @@ function enterKeyAction() {
     }
 }
 
-function readURL() {
-
-    if(this.files && this.files[0]) {
-        var obj     = new FileReader();
-        obj.onload  = function(data) {
-            Profile_Image.src = data.target.result;
-        }
-
-        obj.readAsDataURL(this.files[0]);
-
-        StoreImageToFirebase(this.files[0],this.files[0].name);
-    }
-
-}
-
-function StoreImageToFirebase(file,file_name) {
+function StoreImageToFirebase(file,file_name,width,height) {
     console.log('Uploading to fireabase!!!');
 
     if (chatPartner !== null) {
         
         //Store image into userMessages
-        storageInScope.child(storage_ref + file_name).put(file).on('state_changed', function progress(snapshot) {
+        storageInScope.child('messageImages/'+file_name).put(file).on('state_changed', function progress(snapshot) {
 
             //Handle Upload Session
-            console.log('Profile Image in process of uploading');
+            console.log('Image in process of uploading');
 
         }, function error(err) {
 
             //Handle Failed Upload
-            console.log('Profile Image failed to upload to storage or none was chosen');
+            console.log('Image failed to upload to storage or none was chosen');
 
         }, function complete() {
 
-            console.log('Profile Image successfully uploaded');
+            console.log('Image successfully uploaded');
 
             //Retrieve Profile Image URL
-            storageInScope.child(storage_ref + file_name).getDownloadURL().then(function(url) {
+            storageInScope.child('messageImages/'+file_name).getDownloadURL().then(function(url) {
 
-                console.log('Successfully Registered User');
+                console.log('Successfully UploadedImage');
 
-                // Register_User_In_Database(auth,database,url);
+                enterKeyAction({
+                    fromId: currentUser,
+                    imageHeight: height,
+                    imageUrl: url,
+                    imageWidth: width,
+                    timeStamp: 1,
+                    toId: chatPartner,
+                });
 
             }).catch(function(error) {
 
