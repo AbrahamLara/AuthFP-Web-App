@@ -19,9 +19,10 @@ var storageInScope              = null;
 //OTher stuff yet to be named
 var click                       = true;
 
-
 (function() {
     
+    resizeDisplays(0,100);
+
     firebase.initializeApp(config);
     
     const auth      = firebase.auth();
@@ -41,15 +42,20 @@ var click                       = true;
         
         if(click) {
             click = false;
-            Sidebar.style.width = '255px';
+
+            resizeDisplays(13,87);
+
         } else {
             click = true;
-            Sidebar.style.width = '0px';
+            
+            resizeDisplays(0,100);
         }
     });
     
     //Initializes WebPage for logged in User
     intializeIfUserIsLoggedOn(auth,database);
+
+    document.getElementById('Display_Messages').style.height = document.getElementById('Message_Display_Box').clientHeight - 90 + 'px';
     
     //Allows for enter key to send messages
     Text_Input.addEventListener('keyup', function(event) {
@@ -71,20 +77,26 @@ var click                       = true;
     //Will allow for me to get the image width and height to be able to upoad to firebase
 
     $("#Upload_File").change(function(e) {
-    var file, img;
+        var file, img;
 
-    if ((file = this.files[0])) {
-        img = new Image();
-        img.onload = function() {
-            StoreImageToFirebase(file,file.name,this.width,this.height);
-        };
-        img.src = window.URL.createObjectURL(file);
+        if ((file = this.files[0])) {
+            img = new Image();
+            img.onload = function() {
+                StoreImageToFirebase(file,file.name,this.width,this.height);
+            };
+            img.src = window.URL.createObjectURL(file);
 
-    }
+        }
 
-});
+    });
 
 }());
+
+function resizeDisplays(Left_Display_Width,Right_Display_Width) {
+    document.getElementById('Right_Display').style.width = Right_Display_Width + '%';
+    document.getElementById('Left_Display').style.width = Left_Display_Width + '%';
+    Text_Input.style.width = document.getElementById('Message_Display_Box').clientWidth - 45 + 'px';
+}
 
 function intializeIfUserIsLoggedOn(auth,database) {
     //Checks whether a user is signed in
@@ -111,6 +123,7 @@ function Retrieve_User_Info(profileImageURL,id,uid) {
     Display_Messages.innerHTML = "";
 
     databaseInScope.child('User-Messages').child(uid).child(id).on('child_added', function(snapshot) {
+
         var messageId = snapshot.key;
 
         databaseInScope.child('AuthFP App User Messages').child(messageId).on('value', function(Snapshot) {
@@ -124,17 +137,18 @@ function Retrieve_User_Info(profileImageURL,id,uid) {
                 imageUrl !== null ? $('#Display_Messages').append(need.setBlueBubbleImage(imageUrl)) 
                 : $('#Display_Messages').append(need.setBlueBubbleText(text));
 
-            } else {
+            } 
+            
+            if (fromId === chatPartner) {
                 imageUrl !== null ? $('#Display_Messages').append(need.setGreyBubbleImage(imageUrl,profileImageURL)) 
                 : $('#Display_Messages').append(need.setGreyBubbleText(text,profileImageURL));
             }
 
         });
 
+        //Allows for the div to automatically scroll down to load new message
+        Display_Messages.scrollTop = Display_Messages.scrollHeight;
     });
-
-    //Allows for the div to automatically scroll down to load new message
-    Display_Messages.scrollTop = Display_Messages.scrollHeight;
 
 }
 
