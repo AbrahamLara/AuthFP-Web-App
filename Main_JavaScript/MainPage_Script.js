@@ -69,17 +69,20 @@ var click                       = true;
     });
 
     //Will allow for me to get the image width and height to be able to upoad to firebase
+
     $("#Upload_File").change(function(e) {
-        var file, img;
+    var file, img;
 
-        if ((file = this.files[0])) {
-            img = new Image();
-            img.onload = function() {
-                StoreImageToFirebase(file,file.name,this.width,this.height);
-            };
-        }
+    if ((file = this.files[0])) {
+        img = new Image();
+        img.onload = function() {
+            StoreImageToFirebase(file,file.name,this.width,this.height);
+        };
+        img.src = window.URL.createObjectURL(file);
 
-    });
+    }
+
+});
 
 }());
 
