@@ -37,7 +37,7 @@ div.Title_Container {
     padding: 5px;
 }
 
-img[id="Sidebar_Icon"]:hover {
+#Sidebar_Icon:hover {
     opacity: 0.8;
 }
 
@@ -59,7 +59,7 @@ div.User_Container {
     float: right;
 }
 
-img[id="Profile_Image"] {
+#Profile_Image {
     height: 50px;
     border-radius: 25px;
     float: left;
@@ -147,7 +147,7 @@ div.Message_Display_Box {
     height: 802px;
     border-radius: 5px;
     margin: auto;
-    background-color: white;
+    /* background-color: white; */
 }
 
 div.Display_Messages {
@@ -155,7 +155,18 @@ div.Display_Messages {
     width: inherit;
     display: block;
     overflow: scroll;
-    background-color: white;
+    /* background-color: white; */
+}
+
+#Message {
+    color: lightgrey;
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+    height: 5px;
+    width: 192px;
+    font-family: sans-serif;
+    font-style: italic;
 }
 
                                                             /*Cell Design Starts Here*/
@@ -212,7 +223,10 @@ div.Input_View {
 
 #Upload_Image {
     height: inherit;
-    border-radius: 10px;
+}
+
+#Upload_Image:hover {
+    opacity: 0.6;
 }
 
 #Text_Input {
@@ -222,7 +236,7 @@ div.Input_View {
     width: 458px;
     font-size: 15px;
     background-color: transparent;
-    /* color: white; */
+    color: white;
 }
 
                                                             /*Input_Views Design Ends  Here*/

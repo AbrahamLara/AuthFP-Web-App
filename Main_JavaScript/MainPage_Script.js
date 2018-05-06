@@ -1,15 +1,8 @@
-//User_Label Initializers
-const Profile_Image             = document.getElementById('Profile_Image');
-const User_Name                 = document.getElementById('User_Name');
 //Main_Display intializers
 const Sidebar                   = document.getElementById('Sidebar');
 //Display_Message Initializers
 const Display_Messages          = document.getElementById('Display_Messages');
-const Upload_Image              = document.getElementById('Upload_Image');
 const Text_Input                = document.getElementById('Text_Input');
-const Blue_Bubble               = document.getElementById('Blue_Bubble');
-const Grey_Bubble               = document.getElementById('Grey_Bubble');
-const ChatPartner_ProfileImage  = document.getElementById('ChatPartner_ProfileImage');
 var chatPartner                 = null;
 var currentUser                 = null;
 //Initialize Firebase
@@ -23,8 +16,6 @@ var config                      = {
 };
 var databaseInScope             = null;
 var storageInScope              = null;
-//Deals with retrieving file stuff
-var file_name                   = null;
 //OTher stuff yet to be named
 var click                       = true;
 
@@ -69,7 +60,7 @@ var click                       = true;
                 enterKeyAction({
                     fromId: currentUser,
                     text: Text_Input.value,
-                    timeStamp: 1,
+                    timeStamp: new Date()/1000,
                     toId: chatPartner,
                 });
                 Text_Input.value = "";
@@ -86,7 +77,6 @@ var click                       = true;
             img.onload = function() {
                 StoreImageToFirebase(file,file.name,this.width,this.height);
             };
-
         }
 
     });
@@ -122,7 +112,6 @@ function Retrieve_User_Info(profileImageURL,id,uid) {
 
         databaseInScope.child('AuthFP App User Messages').child(messageId).on('value', function(Snapshot) {
 
-            var toId    = Snapshot.child('toId').val();
             var fromId  = Snapshot.child('fromId').val();
             var text    = Snapshot.child('text').val();
             var imageUrl = Snapshot.child('imageUrl').val();
@@ -137,11 +126,12 @@ function Retrieve_User_Info(profileImageURL,id,uid) {
                 : $('#Display_Messages').append(need.setGreyBubbleText(text,profileImageURL));
             }
 
-            //Allows for the div to automatically scroll down to load new message
-            Display_Messages.scrollTop = Display_Messages.scrollHeight;
         });
 
     });
+
+    //Allows for the div to automatically scroll down to load new message
+    Display_Messages.scrollTop = Display_Messages.scrollHeight;
 
 }
 
@@ -162,8 +152,8 @@ function Setup_User_Label(database,firebaseUser) {
     
     database.child('AuthFP App Users').child(firebaseUser.uid).on('value', function(snapshot) {
         
-        User_Name.textContent   = snapshot.child('name').val();
-        Profile_Image.src       = snapshot.child('profileImageURL').val();
+        document.getElementById('User_Name').textContent   = snapshot.child('name').val();
+        document.getElementById('Profile_Image').src       = snapshot.child('profileImageURL').val();
         
     });
     
@@ -219,7 +209,7 @@ function StoreImageToFirebase(file,file_name,width,height) {
                     imageHeight: height,
                     imageUrl: url,
                     imageWidth: width,
-                    timeStamp: 1,
+                    timeStamp: new Date()/1000,
                     toId: chatPartner,
                 });
 

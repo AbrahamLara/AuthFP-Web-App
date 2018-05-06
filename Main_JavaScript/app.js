@@ -186,7 +186,7 @@ function Handle_Register_Button(auth,database,storage) {
 
             Set_Message_Label('rgb(255,255,255)','Successfully Registered User');
 
-            Register_User_In_Database(auth,database,'https://firebasestorage.googleapis.com/v0/b/playground-a45e6.appspot.com/o/AuthFP_App_Users_Profile_Images%2F1FFF2275-1CF5-45AB-97B6-1E81545CAFDC.jpg?alt=media&token=ab3b4d96-79cc-4b1c-a2de-4628b762c3d0');
+            Register_User_In_Database(auth,database,'https://firebasestorage.googleapis.com/v0/b/playground-a45e6.appspot.com/o/AuthFP_App_Users_Profile_Images%2Fperson-default.png?alt=media&token=16ff8143-2520-4e04-b4ed-4abe97b6c7d2');
 
         } else {
             //Handle Errors
