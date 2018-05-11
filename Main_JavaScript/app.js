@@ -1,4 +1,3 @@
-const File_Input        = document.getElementById('File_Input');
 const Profile_Image     = document.getElementById('Profile_Image');
 //Switch_Control Intializers
 const Login_Control     = document.getElementById('Login_Control');
@@ -6,31 +5,30 @@ const Login_Label       = document.getElementById('Login_Label');
 const Register_Control  = document.getElementById('Register_Control');
 const Register_Label    = document.getElementById('Register_Label');
 //Input_Container Initializers
-const Message_Label     = document.getElementById('Message_Label');
 const Input_Container   = document.getElementById('Input_Container');
 const Name_Input        = document.getElementById('Name_Input');
 const Name_Separator    = document.getElementById('Name_Separator');
 const Email_Input       = document.getElementById('Email_Input');
-const Email_Separator   = document.getElementById('Email_Separator');
 const Password_Input    = document.getElementById('Password_Input');
 //Login/Register Initializers
 const Login_Button      = document.getElementById('Login_Button');
 const Register_Button   = document.getElementById('Register_Button');
-//Initialize Firebase
-var config              = {
-    apiKey: "AIzaSyCylUT0zVmt8UocdVuHZ3RGmuj1fNyyFbw",
-    authDomain: "playground-a45e6.firebaseapp.com",
-    databaseURL: "https://playground-a45e6.firebaseio.com",
-    projectId: "playground-a45e6",
-    storageBucket: "playground-a45e6.appspot.com",
-    messagingSenderId: "102092502135"
-};
 //Deals with Profile_Image info
 var storage_ref         = 'AuthFP_App_Users_Profile_Images/';
 var file_name           = "person-default";
 var file                = Profile_Image.baseURI;
 
 (function() {
+
+    //Initialize Firebase
+    var config              = {
+        apiKey: "AIzaSyCylUT0zVmt8UocdVuHZ3RGmuj1fNyyFbw",
+        authDomain: "playground-a45e6.firebaseapp.com",
+        databaseURL: "https://playground-a45e6.firebaseio.com",
+        projectId: "playground-a45e6",
+        storageBucket: "playground-a45e6.appspot.com",
+        messagingSenderId: "102092502135"
+    };
 
     firebase.initializeApp(config);
 
@@ -81,36 +79,30 @@ function readURL() {
 
 function Handle_Login_Control() {
 
-    Message_Label.textContent           = "Type Email and Password";
-
-    Message_Label.style.color           = "white";
+    Set_Message('white',"Type Email and Password");
 
     Login_Button.style.display          = "block";
     Register_Button.style.display       = "none";
 
-    Login_Control.style.background      = "white";
+    Register_Label.style.color          = Login_Control.style.background      = "white";
     Register_Control.style.background   = "transparent";
 
     Login_Label.style.color             = "rgb(61,91,151)";
-    Register_Label.style.color          = Login_Control.style.background;
 
     Input_Container.style.height        = "83px";
 
-    Name_Input.style.display            = Register_Button.style.display;
-    Name_Separator.style.display        = Register_Button.style.display;
+    Name_Separator.style.display        = Name_Input.style.display = Register_Button.style.display;
 
-    Email_Input.style.height            = "35px";
-    Password_Input.style.height         = Email_Input.style.height;
+    Password_Input.style.height         = Email_Input.style.height = "35px";
 }
 
 function Handle_Register_Control() {
 
-    Message_Label.textContent           = "Fill in all fields";
-
-    Message_Label.style.color           = "white";
+    Set_Message_Label('white',"Fill in all fields");
 
     Login_Button.style.display          = Register_Button.style.display;
-    Register_Button.style.display       = "";
+
+    Name_Separator.style.display        = Name_Input.style.display = Register_Button.style.display = "";
 
     Login_Control.style.background      = "transparent";
     Register_Control.style.background   = "white";
@@ -120,11 +112,8 @@ function Handle_Register_Control() {
 
     Input_Container.style.height        = "125px";
 
-    Name_Input.style.display            = Register_Button.style.display;
-    Name_Separator.style.display        = Register_Button.style.display;
+    Password_Input.style.height         = Email_Input.style.height = Name_Input.style.height;
 
-    Email_Input.style.height            = Name_Input.style.height;
-    Password_Input.style.height         = Name_Input.style.height;
 }
 
 function Handle_Login_Button(auth) {
@@ -197,14 +186,12 @@ function Handle_Register_Button(auth,database,storage) {
 
         }
 
-
-
     });
 }
 
 function Set_Message_Label(color,textContent) {
-    Message_Label.style.color = color;
-    Message_Label.textContent = textContent;
+    document.getElementById('Message_Label').style.color = color;
+    document.getElementById('Message_Label').textContent = textContent;
 }
 
 function Register_User_In_Database(auth,database,url) {

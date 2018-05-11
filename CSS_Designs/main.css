@@ -1,6 +1,6 @@
 html, body {
     height: 100%;
-    background-color: rgb(61,91,151); /*Other option rgba*/
+    background-color: rgb(61,91,151);
     overflow: hidden;
 }
 
@@ -13,16 +13,12 @@ div.Container {
     display: block;
     width: 340px;
     height: 40%;
-    /*Allows for div to be aligned center of page.
-    Note: A defined Width and Height is neccessary
-    for effect*/
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     margin: auto;
-    /*********************************************/
     text-align: center;
 }
 
@@ -139,7 +135,6 @@ div.Name_Separator, div.Email_Separator {
     height: 35px;
     border-radius: 5px;
     font-size: 14px;
-/*    cursor: pointer;*/
 }
 
 #Login_Button {
