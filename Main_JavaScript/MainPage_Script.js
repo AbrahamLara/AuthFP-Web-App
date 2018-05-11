@@ -1,19 +1,8 @@
-//Main_Display intializers
-const Sidebar                   = document.getElementById('Sidebar');
 //Display_Message Initializers
 const Display_Messages          = document.getElementById('Display_Messages');
-const Text_Input                = document.getElementById('Text_Input');
 var chatPartner                 = null;
 var currentUser                 = null;
-//Initialize Firebase
-var config                      = {
-    apiKey: "AIzaSyCylUT0zVmt8UocdVuHZ3RGmuj1fNyyFbw",
-    authDomain: "playground-a45e6.firebaseapp.com",
-    databaseURL: "https://playground-a45e6.firebaseio.com",
-    projectId: "playground-a45e6",
-    storageBucket: "playground-a45e6.appspot.com",
-    messagingSenderId: "102092502135"
-};
+
 var databaseInScope             = null;
 var storageInScope              = null;
 
@@ -22,6 +11,16 @@ var click                       = true;
 (function() {
     
     resizeDisplays(0,100);
+
+    //Initialize Firebase
+    var config                      = {
+        apiKey: "AIzaSyCylUT0zVmt8UocdVuHZ3RGmuj1fNyyFbw",
+        authDomain: "playground-a45e6.firebaseapp.com",
+        databaseURL: "https://playground-a45e6.firebaseio.com",
+        projectId: "playground-a45e6",
+        storageBucket: "playground-a45e6.appspot.com",
+        messagingSenderId: "102092502135"
+    };
 
     firebase.initializeApp(config);
     
@@ -58,7 +57,7 @@ var click                       = true;
     document.getElementById('Display_Messages').style.height = document.getElementById('Message_Display_Box').clientHeight - 90 + 'px';
     
     //Allows for enter key to send messages
-    Text_Input.addEventListener('keyup', function(event) {
+    document.getElementById('Text_Input').addEventListener('keyup', function(event) {
         event.preventDefault();
         
         if (event.keyCode === 13) {
@@ -95,7 +94,7 @@ var click                       = true;
 function resizeDisplays(Left_Display_Width,Right_Display_Width) {
     document.getElementById('Right_Display').style.width    = Right_Display_Width + '%';
     document.getElementById('Left_Display').style.width     = Left_Display_Width + '%';
-    Text_Input.style.width                                  = document.getElementById('Message_Display_Box').clientWidth - 45 + 'px';
+    document.getElementById('Text_Input').style.width       = document.getElementById('Message_Display_Box').clientWidth - 45 + 'px';
 }
 
 function intializeIfUserIsLoggedOn(auth,database) {
