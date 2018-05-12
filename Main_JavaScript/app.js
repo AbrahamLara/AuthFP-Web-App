@@ -79,7 +79,7 @@ function readURL() {
 
 function Handle_Login_Control() {
 
-    Set_Message('white',"Type Email and Password");
+    Set_Message_Label('white',"Type Email and Password");
 
     Login_Button.style.display          = "block";
     Register_Button.style.display       = "none";

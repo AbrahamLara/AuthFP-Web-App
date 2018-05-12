@@ -130,17 +130,28 @@ function Retrieve_User_Info(profileImageURL,id,uid) {
             var fromId  = Snapshot.child('fromId').val();
             var text    = Snapshot.child('text').val();
             var imageUrl = Snapshot.child('imageUrl').val();
+            var videoUrl = Snapshot.child('videoUrl').val();
+
+            console.log(videoUrl);
 
             if (fromId === uid) {
 
-                imageUrl !== null ? $('#Display_Messages').append(need.setBlueBubbleImage(imageUrl)) 
-                : $('#Display_Messages').append(need.setBlueBubbleText(text));
+                if (videoUrl !== null) $('#Display_Messages').append(need.setBlueBubbleVideo(videoUrl));
+            
+                else if (imageUrl !== null) $('#Display_Messages').append(need.setBlueBubbleImage(imageUrl));
+            
+                else $('#Display_Messages').append(need.setBlueBubbleText(text));
 
             } 
             
             if (fromId === chatPartner) {
-                imageUrl !== null ? $('#Display_Messages').append(need.setGreyBubbleImage(imageUrl,profileImageURL)) 
-                : $('#Display_Messages').append(need.setGreyBubbleText(text,profileImageURL));
+
+                if(videoUrl !== null) $('#Display_Messages').append(need.setGreyBubbleVideo(videoUrl,profileImageURL));
+                
+                else if(imageUrl !== null) $('#Display_Messages').append(need.setGreyBubbleImage(imageUrl,profileImageURL));
+                
+                else $('#Display_Messages').append(need.setGreyBubbleText(text,profileImageURL));
+            
             }
 
             //Allows for the div to automatically scroll down to load new message

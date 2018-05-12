@@ -205,6 +205,10 @@ div.cell {
     padding: 0px 5px;
 }
 
+#Vid_Bubble {
+    border-radius: 15px;
+}
+
 #Img_Bubble {
     border-radius: 10px;
     max-width: 300px;
