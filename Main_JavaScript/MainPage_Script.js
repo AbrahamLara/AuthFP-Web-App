@@ -12,12 +12,7 @@ var click                       = true;
 
     //Initialize Firebase
     var config                      = {
-        apiKey: "AIzaSyCylUT0zVmt8UocdVuHZ3RGmuj1fNyyFbw",
-        authDomain: "playground-a45e6.firebaseapp.com",
-        databaseURL: "https://playground-a45e6.firebaseio.com",
-        projectId: "playground-a45e6",
-        storageBucket: "playground-a45e6.appspot.com",
-        messagingSenderId: "102092502135"
+        Open firebase, add new web app and paste snippets here
     };
 
     firebase.initializeApp(config);
