@@ -2,6 +2,10 @@ class SetNecessities {
     
     constructor() {}
 
+    defaultProfilePic() {
+        return 'https://firebasestorage.googleapis.com/v0/b/playground-a45e6.appspot.com/o/AuthFP_App_Users_Profile_Images%2Fperson-default.png?alt=media&token=16ff8143-2520-4e04-b4ed-4abe97b6c7d2';
+    }
+
     setBlueBubbleText(text) {
         return "<div class=\"Cell\"><div class=\"cell\" style=\"margin-left: auto\"><span id=\"Bubble\" style=\"background-color:rgb(0,137,250);float:right;color:white;\">" + text + "</span></div></div>";
     }

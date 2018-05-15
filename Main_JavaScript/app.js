@@ -22,12 +22,7 @@ var file                = Profile_Image.baseURI;
 
     //Initialize Firebase
     var config              = {
-        apiKey: "AIzaSyCylUT0zVmt8UocdVuHZ3RGmuj1fNyyFbw",
-        authDomain: "playground-a45e6.firebaseapp.com",
-        databaseURL: "https://playground-a45e6.firebaseio.com",
-        projectId: "playground-a45e6",
-        storageBucket: "playground-a45e6.appspot.com",
-        messagingSenderId: "102092502135"
+        //Open firebase, add new web app and paste snippets here
     };
 
     firebase.initializeApp(config);
@@ -175,7 +170,8 @@ function Handle_Register_Button(auth,database,storage) {
 
             Set_Message_Label('rgb(255,255,255)','Successfully Registered User');
 
-            Register_User_In_Database(auth,database,'https://firebasestorage.googleapis.com/v0/b/playground-a45e6.appspot.com/o/AuthFP_App_Users_Profile_Images%2Fperson-default.png?alt=media&token=16ff8143-2520-4e04-b4ed-4abe97b6c7d2');
+
+            Register_User_In_Database(auth,database,new SetNecessities().defaultProfilePic());
 
         } else {
             //Handle Errors
