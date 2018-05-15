@@ -9,8 +9,6 @@ var storageInScope              = null;
 var click                       = true;
 
 (function() {
-    
-    resizeDisplays(0,100);
 
     //Initialize Firebase
     var config                      = {

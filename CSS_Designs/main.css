@@ -1,7 +1,7 @@
 html, body {
-    height: 100%;
     background-color: rgb(61,91,151);
     overflow: hidden;
+    margin: 0;
 }
 
 #File_Input {
@@ -24,15 +24,11 @@ div.Container {
 
                                                             /*Top_Box Design Starts Here*/
 
-div.Top_Box {
+nav.Top_Box {
     background-color: rgba(0,0,0,0.5);
     width: 100%;
     height: 50px;
-    display: block;
     color: white;
-    position: absolute;
-    left: 0;
-    top: 0;
 }
 
 div.Title_Label {

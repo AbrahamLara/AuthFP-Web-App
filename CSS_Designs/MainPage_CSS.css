@@ -1,28 +1,21 @@
 html, body {
-    height: 100%;
-    background-color: rgb(61,91,151); /*Other option rgba*/
+    margin: 0;
+    background-color: rgb(61,91,151);
     overflow: hidden;
+    height: 100%;
 }
 
 #Upload_File {
     visibility: hidden;
-}
-
-div.Container {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: absolute;    
 }
 
 /*Top_Box Design Starts Here*/
 
-div.Top_Box {
+nav.Top_Box {
     background-color: rgba(0,0,0,0.5);
     width: 100%;
     height: 50px;
-    display: block;
     color: white;
 }
                                                             /*Title_Container Design Starts Here*/
@@ -86,15 +79,13 @@ div.User_Container {
 /*Top_Box Design Ends   Here*/
 
 div.Left_Display {
-    height: 100%;
     float: left;
+    height: 100%;
     width: 0%;
-    /* background-color: red; */
 }
 
 div.Right_Display {
     float: right;
-    /* background-color: blue; */
     height: 100%;
     width: 100%;
 }
@@ -160,8 +151,7 @@ div.Message_Display_Box {
     width: 100%;
     height: 100%;
     border-radius: 5px;
-    margin: auto;
-    /* background-color: white; */
+    display: block;
 }
 
 div.Display_Messages {
@@ -169,7 +159,6 @@ div.Display_Messages {
     width: inherit;
     display: block;
     overflow: scroll;
-    /* background-color: white; */
 }
 
 #Message {
