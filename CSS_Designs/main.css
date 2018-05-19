@@ -27,15 +27,11 @@ div.Container {
 nav.Top_Box {
     background-color: rgba(0,0,0,0.5);
     width: 100%;
-    height: 50px;
-    color: white;
-}
-
-div.Title_Label {
-    font-family: sans-serif;
+    height: 20px;
     color: white;
     padding: 15px 0px;
     text-align: center;
+    font-family: sans-serif;
 }
 
                                                             /*Top_Box Design Ends    Here*/
@@ -55,6 +51,8 @@ div.Switch_Control {
 div.Login_Control, div.Register_Control {
     width: 50%;
     height: 100%;
+    font-size: 13px;
+    font-family: sans-serif;
 }
 
 div.Login_Control {
@@ -65,12 +63,6 @@ div.Register_Control {
     float: right;
     background-color: white;
     color: rgb(61,91,151);
-}
-
-#Login_Label, #Register_Label {
-    font-family: sans-serif;
-    font-size: 13px;
-    display: block;
 }
 
                                                             /*Switch_Control Design Ends   Here*/

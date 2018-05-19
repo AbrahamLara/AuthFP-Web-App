@@ -12,7 +12,10 @@ var click                       = true;
 
     //Initialize Firebase
     var config                      = {
-        Open firebase, add new web app and paste snippets here
+        /*
+            Go to your firebase console, add a new Web App, then
+            Copy your config snippet here.
+        */
     };
 
     firebase.initializeApp(config);

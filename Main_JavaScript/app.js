@@ -16,13 +16,16 @@ const Register_Button   = document.getElementById('Register_Button');
 //Deals with Profile_Image info
 var storage_ref         = 'AuthFP_App_Users_Profile_Images/';
 var file_name           = "person-default";
-var file                = Profile_Image.baseURI;
+var file                ;
 
 (function() {
 
     //Initialize Firebase
     var config              = {
-        Open firebase, add new web app and paste snippets here
+        /*
+            Go to your firebase console, add a new Web App, then
+            Copy your config snippet here.
+        */
     };
 
     firebase.initializeApp(config);
@@ -79,10 +82,10 @@ function Handle_Login_Control() {
     Login_Button.style.display          = "block";
     Register_Button.style.display       = "none";
 
-    Register_Label.style.color          = Login_Control.style.background      = "white";
+    Register_Control.style.color        = Login_Control.style.background = "white";
     Register_Control.style.background   = "transparent";
 
-    Login_Label.style.color             = "rgb(61,91,151)";
+    Login_Control.style.color           = "rgb(61,91,151)";
 
     Input_Container.style.height        = "83px";
 
@@ -102,8 +105,8 @@ function Handle_Register_Control() {
     Login_Control.style.background      = "transparent";
     Register_Control.style.background   = "white";
 
-    Login_Label.style.color             = Register_Control.style.background;
-    Register_Label.style.color          = "rgb(61,91,151)";
+    Login_Control.style.color           = Register_Control.style.background;
+    Register_Control.style.color        = "rgb(61,91,151)";
 
     Input_Container.style.height        = "125px";
 
@@ -151,7 +154,7 @@ function Handle_Register_Button(auth,database,storage) {
 
                 console.log('Successfully Registered User');
 
-                Set_Message_Label('rgb(255,255,255)','Successfully Registered User');
+                Set_Message_Label('rgb(255,255,255)','User Created');
 
                 Register_User_In_Database(auth,database,url);
 
@@ -168,7 +171,7 @@ function Handle_Register_Button(auth,database,storage) {
         if (error.code === 'storage/invalid-argument') {
             console.log('Successfully Registered User');
 
-            Set_Message_Label('rgb(255,255,255)','Successfully Registered User');
+            Set_Message_Label('rgb(255,255,255)','User Created');
 
 
             Register_User_In_Database(auth,database,new SetNecessities().defaultProfilePic());
