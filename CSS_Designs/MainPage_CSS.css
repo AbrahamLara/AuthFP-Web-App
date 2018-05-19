@@ -159,17 +159,10 @@ div.Display_Messages {
     width: inherit;
     display: block;
     overflow: scroll;
-}
-
-#Message {
-    color: lightgrey;
-    display: block;
-    margin: auto;
-    margin-top: 10px;
-    height: 5px;
-    width: 372px;
     font-family: sans-serif;
     font-style: italic;
+    color: lightgray;
+    text-align: center;
 }
 
                                                             /*Cell Design Starts Here*/
@@ -206,11 +199,11 @@ div.cell {
 
 
 #Bubble {
-    padding: 5px 5px;
     border-radius: 15px;
-    font-family: sans-serif;
     font-size: 15px;
     padding: 10px 10px;
+    text-align: left;
+    font-style: normal;
 }
                                                             /*Cell Design Ends   Here*/
 

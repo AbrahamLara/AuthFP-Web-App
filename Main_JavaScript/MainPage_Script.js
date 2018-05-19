@@ -15,6 +15,7 @@ var click                       = true;
         /*
             Go to your firebase console, add a new Web App, then
             Copy your config snippet here.
+            Also do the same for the script src in the html files
         */
     };
 
