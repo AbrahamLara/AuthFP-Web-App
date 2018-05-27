@@ -103,6 +103,7 @@ div.Input_Container {
     height: 35px;
     display: block;
     font-size: 12px;
+    text-indent: 7px;
 }
 
 div.Name_Separator, div.Email_Separator {

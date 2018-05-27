@@ -1,103 +1,52 @@
 <!DOCTYPE html>
-
 <html>
-
     <head>
-
-        <meta charset="utf-8">
-
+        <meta charset="utf-8" name="viewport" content="width=device-width,initial-scale = 1">
         <title>AuthFP Main Page</title>
-        
-        <link rel="stylesheet" type="text/css" href="CSS_Designs/MainPage_CSS.css">
-        
+        <link rel="stylesheet" type="text/css" href="CSS_Designs/MainPage_CSS.css">      
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        
         <script src="Insert your firebase src snippet from your firebase console"></script>
-
     </head>
-
     <body>
-
         <input id="Upload_File" type="file" accept="image/jpeg,img/jpg">
-
             <nav class="Top_Box">
-
                 <div class="Title_Container">
-
                     <img id="Sidebar_Icon" src="img/New_Message.png" draggable="false">
-
                     <label class="Title_Label">AuthFP Main Page</label>
-
                 </div>
-
                 <div class="User_Container">
-                    
                     <img id="Profile_Image" draggable="false">
-                    
-                    <label id="User_Name"></label>
-                    
+                    <label id="User_Name"></label>                    
                     <button id="Logout_Button">Logout</button>
-                    
                 </div>
-
             </nav>
-
             <div class="Main_Display">
-
                 <div class="Left_Display" id="Left_Display">
-
                     <div class="Sidebar" id="Sidebar">
-
                         <table id="User_Display_Table">
-    
                             <tbody id="User_Table">
-    
                                 <tr class="User_Row" id="User_Row">
-    
     <!--                        User Accounts from database get appended here-->
-    
                                 </tr>
-    
                             </tbody>
-    
                         </table>
-    
                     </div>
-
                 </div>
-                    
-
                 <div class="Right_Display" id="Right_Display">
-
                     <div class="Message_Display_Box" id="Message_Display_Box">
-                    
                         <div class="Display_Messages" id="Display_Messages">
-
                             <!-- ChatLog goes here -->
                             Click the top left icon to start chatting with someone!
-                            
                         </div>
-
                         <div class="Seperator"></div>
-
                         <div class="Input_View">
-
                             <img id="Upload_Image" src="img/Upload_Image.png" onclick="$('#Upload_File').click()">
-
                             <input id="Text_Input" placeholder="Enter message..." type="text">
-
                         </div>
-                        
                     </div>
-
                 </div>
-
             </div>
-
         <script src="Main_JavaScript/MainPage_Script.js"></script>
-        
         <script src="Main_JavaScript/SetNecessities.js"></script>
-
     </body>
-
 </html>
