@@ -22,11 +22,12 @@ var file                ;
 
     //Initialize Firebase
     var config              = {
-        /*
-            Go to your firebase console, add a new Web App, then
-            Copy your config snippet here.
-            Also do the same for the script src in the html files
-        */
+        apiKey: config.apiKey,
+        authDomain: authDomain.authDomain,
+        databaseURL: config.databaseURL,
+        projectId: config.projectId,
+        storageBucket: config.storageBucket,
+        messagingSenderId: config.messagingSenderId
     };
 
     firebase.initializeApp(config);

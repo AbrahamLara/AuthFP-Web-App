@@ -5,7 +5,8 @@
         <title>AuthFP Web App</title>
         <link rel="stylesheet" type="text/css" href="css/main.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase.js"></script>
+        <script src="config.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
     </head>
 
     <body>
@@ -14,7 +15,7 @@
             AuthFP Web App
         </nav>
         <div class="Container">
-            <img class="Profile_Image" id="Profile_Image" onclick="$('#File_Input').click()">
+            <img class="Profile_Image" src="img/person-default.png" id="Profile_Image" onclick="$('#File_Input').click()">
             <label id="Message_Label">Fill in all fields</label>
             <div class="Switch_Control" id="Switch_Control">
                 <div class="Login_Control" id="Login_Control">
