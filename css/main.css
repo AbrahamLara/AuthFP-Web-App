@@ -1,4 +1,4 @@
-html, body {
+html {
     background-color: rgb(61,91,151);
 }
 
@@ -6,3 +6,36 @@ html, body {
     background-color: rgba(0, 0, 0, 0.5)
 }
 
+.bg-authfp {
+    background-color: rgb(61,91,151);
+}
+
+#File_Input {
+    display: none;
+}
+
+.profile-image {
+    border-radius: 3rem;
+    height: 6rem;
+}
+
+.font-lg {
+    font-size: 1.5rem;
+}
+
+.segmented-controlls {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid white;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.segmented-controlls > div {
+    flex: 1 1 100px;
+}
+
+.selected {
+    background-color: white;
+    color: rgb(61,91,151);
+}

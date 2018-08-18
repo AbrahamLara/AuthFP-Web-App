@@ -10,13 +10,25 @@
         <script src="config.js"></script>
     </head>
 
-    <body>
+    <body class="bg-authfp">
+        <input type="file" id="File_Input" onchange="readURL.call(this)" accept="image/jpeg,image/png,video/mp4">
         <nav class="navbar navbar-expand justify-content-center">
             <a href="/" class="navbar-brand text-light">AuthFP Web App</a>
         </nav>
         <div class="container">
             <div class="text-center">
-                <img src="img/person-default.png" alt="Profile Picture" class="rounded">
+                <div class="view-controller col-lg-4 col-md-4 col-sm-4">
+                    <img src="img/person-default.png" alt="Profile Picture" class="bg-primary profile-image" id="Profile_Image" onclick="$('#File_Input').click()">
+                    <p class="text-light font-lg">Fill in all fields</p>
+                    <div class="segmented-controlls text-light">
+                        <div class="login-control selected">
+                            Log In
+                        </div>
+                        <div class="signup-control">
+                            Sign Up
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
