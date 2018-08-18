@@ -11,22 +11,29 @@
     </head>
 
     <body class="bg-authfp">
-        <input type="file" id="File_Input" onchange="readURL.call(this)" accept="image/jpeg,image/png,video/mp4">
+        <input type="file" id="file_input" accept="image/jpeg,image/png,video/mp4">
         <nav class="navbar navbar-expand justify-content-center">
             <a href="/" class="navbar-brand text-light">AuthFP Web App</a>
         </nav>
         <div class="container">
             <div class="text-center">
-                <div class="view-controller col-lg-4 col-md-4 col-sm-4">
-                    <img src="img/person-default.png" alt="Profile Picture" class="bg-primary profile-image" id="Profile_Image" onclick="$('#File_Input').click()">
-                    <p class="text-light font-lg">Fill in all fields</p>
+                <div class="view-controller">
+                    <img src="img/person-default.png" alt="Profile Picture" class="profile-image" id="profile_image">
+                    <p class="text-light font-lg message-display">Fill in all fields</p>
                     <div class="segmented-controlls text-light">
                         <div class="login-control selected">
                             Log In
                         </div>
-                        <div class="signup-control">
+                        <div class="signup-control bg-authfp">
                             Sign Up
                         </div>
+                    </div>
+                    <div class="input-controller form-inline">
+                        <input class="form-control col-lg-12 col-md-12 col-sm-12 hide" placeholder="Name" id="name" autocomplete="off">
+                        <div class="separator name-separator hide"></div>
+                        <input class="form-control col-lg-12 col-md-12 col-sm-12" type="email" placeholder="Email" id="email" autocomplete="off">
+                        <div class="separator"></div>
+                        <input class="form-control col-lg-12 col-md-12 col-sm-12" type="password" placeholder="Password" id="password" autocomplete="off">
                     </div>
                 </div>
             </div>

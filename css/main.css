@@ -6,12 +6,22 @@ html {
     background-color: rgba(0, 0, 0, 0.5)
 }
 
+.navbar-brand {
+    margin-right: unset;
+}
+
 .bg-authfp {
     background-color: rgb(61,91,151);
 }
 
-#File_Input {
+#file_input {
     display: none;
+}
+
+.text-center {
+    display: flex;
+    justify-content: center;
+    height: 100%;
 }
 
 .profile-image {
@@ -23,12 +33,17 @@ html {
     font-size: 1.5rem;
 }
 
+.message-display {
+    margin-bottom: 3px;
+}
+
 .segmented-controlls {
     display: flex;
-    flex-wrap: wrap;
     border: 1px solid white;
     border-radius: 3px;
+    background-color: white;
     overflow: hidden;
+    margin-bottom: 10px;
 }
 
 .segmented-controlls > div {
@@ -36,6 +51,27 @@ html {
 }
 
 .selected {
-    background-color: white;
     color: rgb(61,91,151);
+}
+
+.input-controller {
+    border-radius: 10px;
+    background-color: white;
+}
+
+.form-control {
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    box-shadow: unset !important;
+}
+
+.separator { 
+    background-color: lightgrey;
+    height: 1px;
+    width: 100%;
+}
+
+.hide {
+    display: none !important;
 }
