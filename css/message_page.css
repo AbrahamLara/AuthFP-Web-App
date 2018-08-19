@@ -21,7 +21,7 @@ html, body {
     height: 100%;
 }
 
-#upload_file {
+#upload_image {
     display: none;
 }
 
@@ -65,4 +65,39 @@ html, body {
     color: white;
     overflow-x: scroll;
     -webkit-overflow-scrolling: touch;
+}
+
+.messages-container {
+    height: 100%;
+}
+
+.messages, .action-bar {
+    display: block;
+    overflow-y: auto;
+    height: inherit;
+}
+
+.messages {
+    padding-bottom: 100px;
+}
+
+.action-bar {
+    height: fit-content;
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.form-control {
+    border: none;
+    outline: none;
+    box-shadow: unset !important;
+    background-color: transparent !important;
+    display: inline-block;
+}
+
+.upload-image {
+    display: inline-block;
+    height: 40px;
 }
