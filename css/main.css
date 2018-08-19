@@ -10,6 +10,10 @@ html {
     margin-right: unset;
 }
 
+.view-controller {
+    width: 30rem;
+}
+
 .bg-authfp {
     background-color: rgb(61,91,151);
 }
@@ -35,6 +39,8 @@ html {
 
 .message-display {
     margin-bottom: 3px;
+    color: white;
+    display: block;
 }
 
 .segmented-controlls {

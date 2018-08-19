@@ -1,25 +1,13 @@
-const Profile_Image     = document.getElementById('Profile_Image');
-//Switch_Control Intializers
-const Login_Control     = document.getElementById('Login_Control');
-const Login_Label       = document.getElementById('Login_Label');
-const Register_Control  = document.getElementById('Register_Control');
-const Register_Label    = document.getElementById('Register_Label');
-//Input_Container Initializers
-const Input_Container   = document.getElementById('Input_Container');
-const Name_Input        = document.getElementById('Name_Input');
-const Name_Separator    = document.getElementById('Name_Separator');
-const Email_Input       = document.getElementById('Email_Input');
-const Password_Input    = document.getElementById('Password_Input');
-//Login/Register Initializers
-const Login_Button      = document.getElementById('Login_Button');
-const Register_Button   = document.getElementById('Register_Button');
 //Deals with Profile_Image info
 var storage_ref         = 'AuthFP_App_Users_Profile_Images/';
 var file_name           = "person-default";
 var file                ;
 
-(function() {
+var auth;
+var database;
+var storage;
 
+$(document).ready(function() {
     //Initialize Firebase
     var configure           = {
         apiKey: config.apiKey,
@@ -32,43 +20,75 @@ var file                ;
 
     firebase.initializeApp(configure);
 
-    const auth      = firebase.auth();
-    const database  = firebase.database().ref();
-    const storage   = firebase.storage().ref();
-
-    Profile_Image.src = "img/person-default.png";
+    auth      = firebase.auth();
+    database  = firebase.database().ref();
+    storage   = firebase.storage().ref();
 
     //Login and Register Controll Handlers
-    Login_Control.addEventListener('click', Handle_Login_Control);
-    Register_Control.addEventListener('click', Handle_Register_Control);
-    
+    $('.login-control').on('click', HandleLoginControl);
+    $('.signup-control').on('click', HandleSignUpControl);
+
     //When Enter key is pressed it fires off enter button
-    Password_Input.addEventListener('keyup',function(event) {
-        event.preventDefault();
-        
-        if (event.keyCode === 13) {
-            
-            Login_Button.style.visibility === 'hidden' ? Register_Button.click() : Login_Button.click();
-            
-        }
-    });
+    $('#password').on('keyup', HandlePasswordInput);
 
     //Login and Register Button Handlers
-    Login_Button.addEventListener('click', e => {
-        Handle_Login_Button(auth);
-    });
-    Register_Button.addEventListener('click', e => {
-        Handle_Register_Button(auth,database,storage);
-    });
+    $('#login-btn').on('click', HandleLoginButton);
+    $('#signup-btn').on('click', HandleSignUpButton);
 
-}());
+    $('#profile_image').on('click', ClickFileInput);
+    
+});
+
+const ClickFileInput  = function() {
+    return $('#file_input').click();
+}
+
+const HandleLoginControl = function() {
+    $('#name').addClass('hide');
+    $('.name-separator').addClass('hide');
+
+    $(this).addClass('selected').removeClass('bg-authfp');
+    $('.signup-control').removeClass('selected').addClass('bg-authfp');
+
+    $('#login-btn').removeClass('hide');
+    $('#signup-btn').addClass('hide');
+}
+
+const HandleSignUpControl = function() {
+    $('#name').removeClass('hide');
+    $('.name-separator').removeClass('hide');
+    
+    $(this).addClass('selected').removeClass('bg-authfp');
+    $('.login-control').removeClass('selected').addClass('bg-authfp');
+
+    $('#login-btn').addClass('hide');
+    $('#signup-btn').removeClass('hide');
+}
+
+const HandlePasswordInput = function(event) {
+    event.preventDefault();
+        
+    if (event.keyCode === 13)
+        $('.login-control').hasClass('hide') ? $('#signup-btn').click() : $('#login-btn').click();
+    
+}
 
 function readURL() {
-
     if(this.files && this.files[0]) {
         var obj     = new FileReader();
         obj.onload  = function(data) {
-            Profile_Image.src = data.target.result;
+
+            var image = new Image();
+            image.src = data.target.result;
+
+            image.onload = function() {                
+                if (image.width == image.height) {
+                    $('#profile_image').attr('src', image.src);
+                    Set_Message_Label('white','Fill in all fields');
+                }
+                else 
+                    Set_Message_Label('red','Image must have equal width and height');
+            }
         }
 
         obj.readAsDataURL(this.files[0]);
@@ -77,51 +97,12 @@ function readURL() {
     }
 }
 
-function Handle_Login_Control() {
-
-    Set_Message_Label('white',"Type Email and Password");
-
-    Login_Button.style.display          = "block";
-    Register_Button.style.display       = "none";
-
-    Register_Control.style.color        = Login_Control.style.background = "white";
-    Register_Control.style.background   = "transparent";
-
-    Login_Control.style.color           = "rgb(61,91,151)";
-
-    Input_Container.style.height        = "83px";
-
-    Name_Separator.style.display        = Name_Input.style.display = Register_Button.style.display;
-
-    Password_Input.style.height         = Email_Input.style.height = "35px";
-}
-
-function Handle_Register_Control() {
-
-    Set_Message_Label('white',"Fill in all fields");
-
-    Login_Button.style.display          = Register_Button.style.display;
-
-    Name_Separator.style.display        = Name_Input.style.display = Register_Button.style.display = "";
-
-    Login_Control.style.background      = "transparent";
-    Register_Control.style.background   = "white";
-
-    Login_Control.style.color           = Register_Control.style.background;
-    Register_Control.style.color        = "rgb(61,91,151)";
-
-    Input_Container.style.height        = "125px";
-
-    Password_Input.style.height         = Email_Input.style.height = Name_Input.style.height;
-
-}
-
-function Handle_Login_Button(auth) {
+const HandleLoginButton = function() {
 
 
-    firebase.auth().signInWithEmailAndPassword(Email_Input.value, Password_Input.value).then(function() {
+    auth.signInWithEmailAndPassword($('#email').val(), $('#password').val()).then(function() {
         
-        window.location = "MainPage.html";
+        window.location = "message_page.html";
 
     }).catch(function(error) {
 
@@ -132,9 +113,9 @@ function Handle_Login_Button(auth) {
     });
 }
 
-function Handle_Register_Button(auth,database,storage) {
+const HandleSignUpButton = function() {
 
-    auth.createUserWithEmailAndPassword(Email_Input.value, Password_Input.value).then(function() {
+    auth.createUserWithEmailAndPassword($('#email').val(), $('#password').val()).then(function() {
 
         //Stores Profile Image into Firebase Storage
         storage.child(storage_ref + file_name).put(file).on('state_changed', function progress(snapshot) {
@@ -156,7 +137,7 @@ function Handle_Register_Button(auth,database,storage) {
 
                 console.log('Successfully Registered User');
 
-                Set_Message_Label('rgb(255,255,255)','User Created');
+                Set_Message_Label('white','User Created');
 
                 Register_User_In_Database(auth,database,url);
 
@@ -170,29 +151,13 @@ function Handle_Register_Button(auth,database,storage) {
 
     }).catch(function(error) {
 
-        if (error.code === 'storage/invalid-argument') {
-            console.log('Successfully Registered User');
-
-            Set_Message_Label('rgb(255,255,255)','User Created');
-
-
-            Register_User_In_Database(auth,database,new SetNecessities().defaultProfilePic());
-
-        } else {
-            //Handle Errors
-
-            Set_Message_Label('rgb(255,58,0)','Failed to Register');
-
-            console.log(error.code + ' : '+ error.message);
-
-        }
+        console.log('an error occured');
 
     });
 }
 
-function Set_Message_Label(color,textContent) {
-    document.getElementById('Message_Label').style.color = color;
-    document.getElementById('Message_Label').textContent = textContent;
+function Set_Message_Label(color,text) {
+    $('.message-display').css('color', color).text(text);
 }
 
 function Register_User_In_Database(auth,database,url) {
