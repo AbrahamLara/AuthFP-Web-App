@@ -13,6 +13,14 @@ html, body {
     padding: 0;
 }
 
+.bg-authfp {
+    background-color: rgb(61,91,151);
+}
+
+.container-fluid, .sidebar, .message-container {
+    height: 100%;
+}
+
 #upload_file {
     display: none;
 }
@@ -23,6 +31,38 @@ html, body {
     padding: 0;
 }
 
+.sidebar {
+    z-index: 0;
+    width: 15rem;
+    padding: 5px;
+    position: fixed;
+}
+
 .sidebar-icon {
     height: 30px !important;
+}
+
+.hide {
+    display: none;
+}
+
+.user-container {
+    display: flex;
+    align-items: center;
+    width: inherit;
+    margin-bottom: 5px;
+}
+
+.other-user-profile-pic {
+    height: 60px;
+    border-radius: 50%;
+}
+
+.user-name {
+    margin-left: 5px;
+    max-width: 110px;
+    max-height: 25px;
+    color: white;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
 }
