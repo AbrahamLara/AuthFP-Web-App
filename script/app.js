@@ -21,16 +21,16 @@ var file                ;
 (function() {
 
     //Initialize Firebase
-    var config              = {
+    var configure           = {
         apiKey: config.apiKey,
-        authDomain: authDomain.authDomain,
+        authDomain: config.authDomain,
         databaseURL: config.databaseURL,
         projectId: config.projectId,
         storageBucket: config.storageBucket,
         messagingSenderId: config.messagingSenderId
     };
 
-    firebase.initializeApp(config);
+    firebase.initializeApp(configure);
 
     const auth      = firebase.auth();
     const database  = firebase.database().ref();
