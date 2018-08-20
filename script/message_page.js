@@ -8,30 +8,32 @@ var storageInScope              = null;
 
 var click                       = true;
 
-(function() {
+var auth;
+var database;
+var storage;
 
+$(document).ready(function() {
     //Initialize Firebase
-    var config                      = {
-        /*
-            Go to your firebase console, add a new Web App, then
-            Copy your config snippet here.
-            Also do the same for the script src in the html files
-        */
+    var configure                      = {
+        apiKey: config.apiKey,
+        authDomain: config.authDomain,
+        databaseURL: config.databaseURL,
+        projectId: config.projectId,
+        storageBucket: config.storageBucket,
+        messagingSenderId: config.messagingSenderId
     };
 
-    firebase.initializeApp(config);
+    firebase.initializeApp(configure);
     
-    const auth      = firebase.auth();
-    const database  = firebase.database().ref();
-    const storage   = firebase.storage().ref();
+    auth      = firebase.auth();
+    database  = firebase.database().ref();
+    storage   = firebase.storage().ref();
     
     databaseInScope = database;
     storageInScope  = storage;
 
     //Logout_Button Handler
-    document.getElementById('Logout_Button').addEventListener('click', e => {
-        auth.signOut();
-    });
+    $('#logout').on('click', HandleLogout);
     
     //Sets up Sidebar once Sidebar_Icon is clicked
     $('#Sidebar_Icon').click(function() {
@@ -85,8 +87,11 @@ var click                       = true;
         }
 
     });
+});
 
-}());
+const HandleLogout = function() {
+    auth.signOut();
+}
 
 function resizeDisplays(Left_Display_Width,Right_Display_Width) {
     document.getElementById('Right_Display').style.width    = Right_Display_Width + '%';

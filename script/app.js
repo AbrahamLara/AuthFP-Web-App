@@ -1,7 +1,7 @@
 //Deals with Profile_Image info
 var storage_ref         = 'AuthFP_App_Users_Profile_Images/';
 var file_name           = "person-default";
-var file                ;
+var file;
 
 var auth;
 var database;
@@ -77,7 +77,6 @@ function readURL() {
     if(this.files && this.files[0]) {
         var obj     = new FileReader();
         obj.onload  = function(data) {
-
             var image = new Image();
             image.src = data.target.result;
 
@@ -86,8 +85,7 @@ function readURL() {
                     $('#profile_image').attr('src', image.src);
                     Set_Message_Label('white','Fill in all fields');
                 }
-                else 
-                    Set_Message_Label('red','Image must have equal width and height');
+                else Set_Message_Label('red','Image must have equal width and height');
             }
         }
 
@@ -98,15 +96,13 @@ function readURL() {
 }
 
 const HandleLoginButton = function() {
-
-
     auth.signInWithEmailAndPassword($('#email').val(), $('#password').val()).then(function() {
         
         window.location = "message_page.html";
 
     }).catch(function(error) {
 
-        Set_Message_Label('rgb(255,58,0)','Failed to Login');
+        Set_Message_Label('red','Failed to Login');
 
         console.log(error.code + ' : '+ error.message);
 
@@ -114,11 +110,11 @@ const HandleLoginButton = function() {
 }
 
 const HandleSignUpButton = function() {
-
     auth.createUserWithEmailAndPassword($('#email').val(), $('#password').val()).then(function() {
+        var storage_child = storage.child(storage_ref + file_name);
 
         //Stores Profile Image into Firebase Storage
-        storage.child(storage_ref + file_name).put(file).on('state_changed', function progress(snapshot) {
+        storage_child.put(file).on('state_changed', function progress(snapshot) {
 
             //Handle Upload Session
             console.log('Profile Image in process of uploading');
@@ -133,13 +129,13 @@ const HandleSignUpButton = function() {
             console.log('Profile Image successfully uploaded');
 
             //Retrieve Profile Image URL
-            storage.child(storage_ref + file_name).getDownloadURL().then(function(url) {
+            storage_child.getDownloadURL().then(function(url) {
 
                 console.log('Successfully Registered User');
 
                 Set_Message_Label('white','User Created');
 
-                Register_User_In_Database(auth,database,url);
+                Register_User_In_Database(url);
 
             }).catch(function(error) {
 
@@ -160,13 +156,13 @@ function Set_Message_Label(color,text) {
     $('.message-display').css('color', color).text(text);
 }
 
-function Register_User_In_Database(auth,database,url) {
+function Register_User_In_Database(url) {
 
     auth.onAuthStateChanged(firebaseUser => {
 
         database.child('AuthFP App Users').child(firebaseUser.uid).set({
-            "email":Email_Input.value,
-            "name": Name_Input.value,
+            "email": $('#email').val(),
+            "name": $('#name').val(),
             "profileImageURL": url
         });
 
